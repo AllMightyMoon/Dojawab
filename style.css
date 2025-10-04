@@ -1,0 +1,328 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.screen.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Landing Screen */
+.app-title {
+    font-size: 4rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #00d4ff, #9d4edd, #ff006e);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease-in-out infinite;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.app-subtitle {
+    font-size: 1.2rem;
+    color: #b0b3d1;
+    text-align: center;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Buttons */
+.btn {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn.primary {
+    background: linear-gradient(45deg, #00d4ff, #9d4edd);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+.btn.secondary {
+    background: linear-gradient(45deg, #9d4edd, #ff006e);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
+}
+
+.btn.secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(157, 78, 221, 0.4);
+}
+
+/* Progress Bar */
+.progress-container {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00d4ff, #9d4edd);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.question-counter {
+    text-align: center;
+    color: #b0b3d1;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Question Container */
+.question-container {
+    width: 100%;
+    max-width: 600px;
+}
+
+.question-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    color: #ffffff;
+}
+
+/* Answer Options */
+.answer-options {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.answer-option {
+    padding: 1.2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-align: left;
+    color: #ffffff;
+}
+
+.answer-option:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.answer-option.selected {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: #00d4ff;
+}
+
+.answer-option.correct {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: #22c55e;
+    animation: correctPulse 0.6s ease;
+}
+
+.answer-option.incorrect {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    animation: incorrectShake 0.6s ease;
+}
+
+@keyframes correctPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+@keyframes incorrectShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Feedback */
+.feedback {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.feedback.correct {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.feedback.incorrect {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Results Screen */
+.results-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, #00d4ff, #9d4edd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.score-container {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.final-score {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #00d4ff;
+    margin-bottom: 1rem;
+}
+
+.score-message {
+    font-size: 1.3rem;
+    color: #b0b3d1;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .app-title {
+        font-size: 3rem;
+    }
+    
+    .question-text {
+        font-size: 1.3rem;
+    }
+    
+    .answer-option {
+        padding: 1rem 1.2rem;
+        font-size: 0.95rem;
+    }
+    
+    .btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .app-title {
+        font-size: 2.5rem;
+    }
+    
+    .app-subtitle {
+        font-size: 1rem;
+    }
+    
+    .question-text {
+        font-size: 1.2rem;
+    }
+    
+    .answer-option {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .final-score {
+        font-size: 2.5rem;
+    }
+    
+    .results-title {
+        font-size: 2rem;
+    }
+}

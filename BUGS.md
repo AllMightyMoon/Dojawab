@@ -1,0 +1,1 @@
+COMPLETED: all the correct answers are in b option, anyone can pass thequiz with clicking all B option. this bug must be fixed
